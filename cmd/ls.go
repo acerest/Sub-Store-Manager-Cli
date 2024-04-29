@@ -37,7 +37,11 @@ func listAllSSMContainer() {
 		if p, e := c.GetPortInfo(); e != nil {
 			portStr = "none"
 		} else {
-			portStr = fmt.Sprintf("%s: %s->%s", p.Type, p.Public, p.Private)
+			ip := "-"
+			if len(c.DockerContainer.Ports) > 0 {
+				ip = c.DockerContainer.Ports[0].IP
+			}
+			portStr = fmt.Sprintf("%s:%s->%s/%s", ip, p.Public, p.Private, p.Type)
 		}
 		tbl.AddRow(c.ContainerType, c.DockerContainer.ID[:24], c.Version, portStr, c.DockerContainer.State, c.Name)
 	}
