@@ -35,6 +35,11 @@ func GetSSMContainers() (fec []Container, bec []Container) {
 			Version:         imageNameParts[1],
 		}
 
+		// 继承原来的 private
+		if len(c.Ports) > 0 && c.Ports[0].IP == "127.0.0.1" {
+			ssmContainer.Private = true
+		}
+
 		switch imageNameParts[0] {
 		case vars.DockerNameFE:
 			ssmContainer.ContainerType = vars.ContainerTypeFE

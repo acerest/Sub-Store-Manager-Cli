@@ -39,6 +39,7 @@ func updateContainer() {
 		ContainerType: oldContainer.ContainerType,
 		HostPort:      oldContainer.HostPort,
 		Version:       inputVersion,
+		Private:       oldContainer.Private,
 	}
 
 	// 检查指定版本
